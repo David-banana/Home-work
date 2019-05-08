@@ -1,0 +1,95 @@
+import java.util.Arrays;
+
+public class MyArrayList {
+	Object[] arr = new Object[0];
+	private int size;
+	
+	public int size() {
+		return size;
+	}
+	
+	public void add(Object obj) {
+			arr = Arrays.copyOf(arr,arr.length + 1);
+			arr[size] = obj;
+			size++;
+	}
+	
+	public void add(int index,Object obj) {
+		arr = Arrays.copyOf(arr,arr.length + 1);
+		if(index > arr.length || index < 0) {
+			System.out.println("出界");
+		}else {
+			for(int i = arr.length - 1; i > index; i--) {
+				arr[i] = arr[i - 1];
+				arr[index] = obj;
+			}
+		}
+		size++;
+	}
+	
+	public Object get(int index) {
+		if(index > arr.length || index < 0)
+			System.out.println("出界");
+		return arr[index];
+		}
+	
+	public String toString() {
+		StringBuilder str1 = new StringBuilder();
+		str1.append("[");
+		for(int i = 0 ;i < arr.length; i ++) {
+			str1.append(arr[i]);
+			str1.append(",");
+		}
+		str1.delete(str1.length()-1, str1.length());
+		str1.append("]");
+		String str2 = str1.toString();
+		return str2;
+	}
+	
+	public void remove(Object obj) {
+		boolean flag = true;
+		int index = 0;
+		for(int i = 0 ;i < arr.length; i ++) {
+			if(arr[i].equals(obj) == true) { 
+				flag = false;
+			 index = i;
+			}
+		}
+			if(flag == true)
+				System.out.println("这个值不存在");
+				else {
+				for(int j = index; j < arr.length - 1;j ++) {
+					arr[j] = arr[j+1];
+				}
+				arr = Arrays.copyOf(arr, arr.length - 1);
+			}
+			size--;
+		}
+	
+	public void remove(int index) {
+		if(index > arr.length || index < 0) {
+			System.out.println("下标错误");
+		}else {
+			for(int j = 0; j < arr.length - index;j ++) {
+				arr[index+j] = arr[index+j+1];
+				arr = Arrays.copyOf(arr, arr.length - 1);
+			}
+		}
+		size--;
+	}
+	public Object set(int index,Object obj) {
+		if(index > arr.length || index < 0) {
+			System.out.println("下标有错误");
+		}
+		arr[index] = obj;
+		return arr[index];
+	}
+	
+	public boolean isEmpty() {
+		boolean flag = false;
+		if(arr.length == 0) {
+			flag = true;
+		}
+		return flag;
+	}
+}
