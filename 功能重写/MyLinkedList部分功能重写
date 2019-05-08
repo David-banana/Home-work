@@ -1,0 +1,116 @@
+public class MyLinkedList {
+	private Node head = new Node();
+	private int size = 0;
+	private class Node{
+	private Object data;
+	private Node next;
+}
+public void add(Object obj) {
+	Node node = head;
+	while(node.next != null) {
+		node = node.next;
+	}
+	Node newNode = new Node();
+	newNode.data = obj;
+	node.next = newNode;
+			size++;
+}
+
+public void add(int index,Object obj) {
+	Node node = head;
+	for(int i = 0 ; i <= index ; i ++) {
+		node = node.next;
+		if(node.next == null) {
+			System.out.println("出界");
+		}
+	}
+	Node newNode = new Node();
+	newNode.data = obj;
+	node.next = newNode;
+	size++;
+}
+
+public Object get(int index) {
+	Node node = head;
+	for(int i = 0 ; i <= index ; i ++) {
+		node = node.next;
+		if(node.next == null) {
+			System.out.println("出界");
+		}
+	}	
+	return node.data;
+}
+
+public int size() {
+	return size;
+}
+public void insert(int index,Object obj) {
+	Node node = head;
+	for(int i = 0; i < index; i++) {
+		node = node.next;
+		if(node.next == null) {
+		System.out.println("出界");	
+		}
+		}
+	Node newNode = new Node();
+	newNode.next = node.next;
+	node.next = newNode;
+	newNode.data = obj;
+	size++;
+}
+public String toString() {
+	StringBuilder str = new StringBuilder();
+	str.append("[");
+	Node node = this.head;
+	while(node.next != null) {
+		str.append(",");
+		node = node.next;
+		str.append(node.data);
+	}
+	str.append("]");
+	str.delete(1, 2);
+	return str.toString();
+}
+public void remove(int index){
+	Node node = head;
+	for(int i = 0; i < index; i++) {
+		node = node.next;
+		if(node.next == null) {
+		System.out.println("出界");	
+		}
+		}
+	node.next = node.next.next;
+	size--;
+}
+
+public void remove(Object obj){
+	Node node = head;
+	while(node.next != null) {
+		node = node.next;
+		if(node.data == obj)
+			node.next = node.next.next;
+	}
+	size--;
+}
+
+public boolean isEmpty() {
+	Node node = head;
+	boolean flag = true;
+	if(node.next != null)
+		flag = false;
+	return flag;
+}
+
+public void set(int index,Object obj) {
+	Node node = head;
+	for(int i = 0; i < index; i++) {
+		node = node.next;
+		if(node.next == null) {
+			System.out.println("出界");
+		}
+	}node.data = obj;
+}
+public boolean contain() {
+	return false;
+}
+}
